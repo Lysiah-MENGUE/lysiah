@@ -1,0 +1,52 @@
+{% load crispy_forms_tags %}
+<div class="col-sm-9 container-fluid" style="background-color: #3D2B1F;color:#FFFFFF;border: solid 2px #CCFFFF;border-radius: 2px;margin-top: 10px;">
+   <div class="container-fluid" style="color: #FFFFFF">
+
+{% if ok %}
+
+  {% if is_send %}
+<div id="myModal" class="modal">
+  <!-- Modal content -->
+  <div class="modal-content">
+    <div class="modal-body">
+      <span class="close">&times;</span>
+      <p style="font-size: 18px;font-family: 'Jazz LET'">MERCI POUR VOTRE VISITE {{ nom }}</p>
+      <p style="font-size: 15px;font-family: 'Jazz LET'">Vous venez de recevoir un mail avec mon CV à jour</p>
+      <p style="font-size: 15px;font-family: 'Jazz LET'">Veuillez verifier votre boite mail</p>
+    </div>
+  </div>
+</div>
+   {% else %}
+   <p class="alert alert-danger" role="alert"> Adresse mail incorrecte, Verifier votre adresse mail </p>
+   {% endif %}
+{% endif %}
+
+
+      <h4 style="text-align: center; font-family: Jazz LET;font-size: 18px;">Merci de rentrer vos informations.Vous recevrez mon cv automatiquement dans vos mails. </h4>
+      <div style="text-align: left; margin-left: 20px;margin-right: 100px;font-size: 18px;">
+         <div class="container-fluid" >
+            {% block content %}
+            <form method="post">
+               {% csrf_token %}
+               <div class="row">
+                  <div class="col-sm-6" >
+                     {{ form.name|as_crispy_field }}
+                  </div>
+                  <div class="col-sm-6">
+                     {{ form.email|as_crispy_field }}
+                  </div>
+               </div>
+               {{ form.entreprise|as_crispy_field }}
+               {{ form.message|as_crispy_field }}
+
+
+               <input type="submit" class="btn btn-info btn-block" value="Envoyer" style="border-style: solid;
+                  border-width: 1px; border-radius: 10px;color:black;" 
+                  onclick='javascript:valider()'><br/>
+
+            </form>
+            {% endblock %}
+         </div>
+      </div>
+   </div>
+</div>

@@ -1,0 +1,1 @@
+web: gunicorn cv_lysiah.wsgi --log-file -
